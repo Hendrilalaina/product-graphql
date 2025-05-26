@@ -3,7 +3,8 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { schema, root } = require('./schema');
+const { schema } = require('./data/schema');
+const { resolvers } = require('./data/resolver')
 
 const app = express();
 
@@ -23,7 +24,7 @@ mongoose.connection.once('open', () => {
 // GraphQL endpoint
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: root,
+  rootValue: resolvers,
   graphiql: true, // Enable GraphiQL UI
 }));
 
