@@ -12,7 +12,7 @@ A simple Node.js application using Express, Apollo Server (GraphQL), and MongoDB
 2. **Set up MongoDB:**
    Make sure MongoDB is running locally, or update the `MONGODB_URI` in a `.env` file:
    ```env
-   MONGODB_URI=mongodb://localhost:27017/graphqlcontacts
+   MONGODB_URI=mongodb://localhost:27017/graphql
    PORT=4000
    ```
 
@@ -26,46 +26,50 @@ A simple Node.js application using Express, Apollo Server (GraphQL), and MongoDB
 
 ## Example GraphQL Queries
 
-- **Add a contact:**
+- **Add a product:**
   ```graphql
-  mutation {
-    addContact(name: "John Doe", email: "john@example.com", phone: "1234567890") {
+    mutation {
+    addProduct(
+      name: "Phone"
+      price: 123
+      soldout: true
+      stores: ["Me"]
+    ) {
       id
       name
-      email
-      phone
+      description
+      price
     }
   }
   ```
 
-- **Get all contacts:**
+- **Get all products:**
   ```graphql
   query {
-    contacts {
+    products {
       id
       name
-      email
-      phone
+      price
     }
   }
   ```
 
-- **Update a contact:**
+- **Update a product:**
   ```graphql
   mutation {
-    updateContact(id: "<CONTACT_ID>", name: "Jane Doe") {
+    updateProduct(id: "<PRODUCT_ID>", name: "PC", description: "PC gamer", price: 123.34, soldout: false) {
       id
       name
-      email
-      phone
+      price
+      stores
     }
   }
   ```
 
-- **Delete a contact:**
+- **Delete a product:**
   ```graphql
   mutation {
-    deleteContact(id: "<CONTACT_ID>") {
+    deleteProduct(id: "<PRODUCT_ID>") {
       id
     }
   }
